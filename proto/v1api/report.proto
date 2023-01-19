@@ -1,6 +1,6 @@
 syntax = "proto3";
-option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1api/report";
-package proto.report;
+option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1api";
+package v1api.report;
 
 import "google/api/annotations.proto";
 

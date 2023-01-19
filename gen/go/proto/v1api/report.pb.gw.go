@@ -2,11 +2,11 @@
 // source: proto/v1api/report.proto
 
 /*
-Package report is a reverse proxy.
+Package v1api is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package report
+package v1api
 
 import (
 	"context"
@@ -77,7 +77,7 @@ func RegisterApiReportServiceHandlerServer(ctx context.Context, mux *runtime.Ser
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/proto.report.ApiReportService/ReportCreate")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v1api.report.ApiReportService/ReportCreate")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -139,7 +139,7 @@ func RegisterApiReportServiceHandlerClient(ctx context.Context, mux *runtime.Ser
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/proto.report.ApiReportService/ReportCreate")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/v1api.report.ApiReportService/ReportCreate")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
