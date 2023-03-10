@@ -8,9 +8,9 @@ message Empty {}
 // 请求中使用的 Page.
 message Page {
   // 当前页号.
-  int32    current_page = 1;
+  int64    current_page = 1;
   // 每页显示的产品数.
-  int32    page_size = 2;
+  int64    page_size = 2;
 }
 
 // Response 中使用的 Pagination.
@@ -34,4 +34,10 @@ message Report {
   string consumer_name = 6; // 客户名称
   bool is_arrived = 7; // 是否来过
   int64 arrive_time = 8; // 客户到达时间
+}
+
+message Error {
+  int32 statusCode = 1;
+  string code = 2;
+  string message = 3;
 }

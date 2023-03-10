@@ -124,13 +124,13 @@
       "type": "object",
       "properties": {
         "current_page": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
+          "format": "int64",
           "description": "当前页号."
         },
         "page_size": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
+          "format": "int64",
           "description": "每页显示的产品数."
         }
       },
