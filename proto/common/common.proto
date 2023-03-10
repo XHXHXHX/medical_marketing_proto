@@ -37,7 +37,7 @@ message Report {
 }
 
 message Error {
-  int32 code = 1;
+  string code = 1;
   string message = 2;
   string details = 3;
 }
