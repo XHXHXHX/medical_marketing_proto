@@ -1,0 +1,37 @@
+syntax = "proto3";
+package common;
+
+option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/common";
+
+message Empty {}
+
+// 请求中使用的 Page.
+message Page {
+  // 当前页号.
+  int32    current_page = 1;
+  // 每页显示的产品数.
+  int32    page_size = 2;
+}
+
+// Response 中使用的 Pagination.
+message Pagination {
+  // 总页数.
+  int32    page_count = 1;
+  // 每页显示的产品数.
+  int32    page_size = 2;
+  // 总数.
+  int32    total = 3;
+  // 当前页号.
+  int32    current_page = 4;
+}
+
+message Report {
+  int64 id = 1; //
+  int64 user_id = 2; // 员工id
+  string user_name = 3; // 员工名称
+  int64 except_arrive_time = 4; // 预期到达时间
+  string consumer_mobile = 5; // 客户电话
+  string consumer_name = 6; // 客户名称
+  bool is_arrived = 7; // 是否来过
+  int64 arrive_time = 8; // 客户到达时间
+}

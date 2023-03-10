@@ -24,7 +24,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/reportReportCreateResponse"
+              "$ref": "#/definitions/commonEmpty"
             }
           },
           "default": {
@@ -48,9 +48,153 @@
           "apiReportService"
         ]
       }
+    },
+    "/api/report/delete": {
+      "post": {
+        "summary": "报单撤销.",
+        "operationId": "apiReportService_ReportRecover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportReportRecoverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiReportService"
+        ]
+      }
+    },
+    "/api/report/list": {
+      "post": {
+        "summary": "报单列表.",
+        "operationId": "apiReportService_ReportList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reportReportListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportReportListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiReportService"
+        ]
+      }
     }
   },
   "definitions": {
+    "commonEmpty": {
+      "type": "object"
+    },
+    "commonPage": {
+      "type": "object",
+      "properties": {
+        "current_page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页号."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页显示的产品数."
+        }
+      },
+      "description": "请求中使用的 Page."
+    },
+    "commonPagination": {
+      "type": "object",
+      "properties": {
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页显示的产品数."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总数."
+        },
+        "current_page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页号."
+        }
+      },
+      "description": "Response 中使用的 Pagination."
+    },
+    "commonReport": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "except_arrive_time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "consumer_mobile": {
+          "type": "string"
+        },
+        "consumer_name": {
+          "type": "string"
+        },
+        "is_arrived": {
+          "type": "boolean"
+        },
+        "arrive_time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -64,10 +208,68 @@
       }
     },
     "reportReportCreateRequest": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "consumer_mobile": {
+          "type": "string"
+        },
+        "consumer_name": {
+          "type": "string"
+        },
+        "expire_arrive_time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     },
-    "reportReportCreateResponse": {
-      "type": "object"
+    "reportReportListRequest": {
+      "type": "object",
+      "properties": {
+        "consumer_mobile": {
+          "type": "string"
+        },
+        "create_start_time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creat_end_time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_arrived": {
+          "type": "boolean"
+        },
+        "page": {
+          "$ref": "#/definitions/commonPage"
+        }
+      }
+    },
+    "reportReportListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonReport"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/commonPagination"
+        }
+      }
+    },
+    "reportReportRecoverRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     },
     "rpcStatus": {
       "type": "object",

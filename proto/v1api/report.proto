@@ -3,21 +3,53 @@ option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1a
 package v1api.report;
 
 import "google/api/annotations.proto";
+import "proto/common/common.proto";
 
 service apiReportService {
   // 报单登记.
-  rpc ReportCreate (ReportCreateRequest)returns(ReportCreateResponse) {
+  rpc ReportCreate (ReportCreateRequest)returns(common.Empty) {
     option (google.api.http) = {
       post: "/api/report/create"
       body: "*"
     };
   }
+  // 报单撤销.
+  rpc ReportRecover (ReportRecoverRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/report/delete"
+      body: "*"
+    };
+  }
+  // 报单列表.
+  rpc ReportList (ReportListRequest)returns(ReportListResponse) {
+    option (google.api.http) = {
+      post: "/api/report/list"
+      body: "*"
+    };
+  }
+}
+
+message ReportListResponse {
+  repeated common.Report list = 1;
+  common.Pagination page = 2;
+}
+
+message ReportListRequest {
+  string consumer_mobile = 1; // 客户电话
+  int64 create_start_time = 2; // 报单开始时间
+  int64 creat_end_time = 3; // 报单结束时间
+  int64 user_id = 4; // 员工id
+  bool is_arrived = 5; // 是否来过
+  common.Page page = 6;
 }
 
 message ReportCreateRequest {
-
+  string consumer_mobile = 1;
+  string consumer_name = 2;
+  int64 expire_arrive_time = 3;
 }
 
-message ReportCreateResponse {
-
+message ReportRecoverRequest {
+  int64 id = 1;
 }
+

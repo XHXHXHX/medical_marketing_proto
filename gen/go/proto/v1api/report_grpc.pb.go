@@ -4,6 +4,7 @@ package v1api
 
 import (
 	context "context"
+	common "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,7 +20,11 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiReportServiceClient interface {
 	// 报单登记.
-	ReportCreate(ctx context.Context, in *ReportCreateRequest, opts ...grpc.CallOption) (*ReportCreateResponse, error)
+	ReportCreate(ctx context.Context, in *ReportCreateRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// 报单撤销.
+	ReportRecover(ctx context.Context, in *ReportRecoverRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// 报单列表.
+	ReportList(ctx context.Context, in *ReportListRequest, opts ...grpc.CallOption) (*ReportListResponse, error)
 }
 
 type apiReportServiceClient struct {
@@ -30,9 +35,27 @@ func NewApiReportServiceClient(cc grpc.ClientConnInterface) ApiReportServiceClie
 	return &apiReportServiceClient{cc}
 }
 
-func (c *apiReportServiceClient) ReportCreate(ctx context.Context, in *ReportCreateRequest, opts ...grpc.CallOption) (*ReportCreateResponse, error) {
-	out := new(ReportCreateResponse)
+func (c *apiReportServiceClient) ReportCreate(ctx context.Context, in *ReportCreateRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
 	err := c.cc.Invoke(ctx, "/v1api.report.apiReportService/ReportCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiReportServiceClient) ReportRecover(ctx context.Context, in *ReportRecoverRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiReportService/ReportRecover", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiReportServiceClient) ReportList(ctx context.Context, in *ReportListRequest, opts ...grpc.CallOption) (*ReportListResponse, error) {
+	out := new(ReportListResponse)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiReportService/ReportList", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +67,11 @@ func (c *apiReportServiceClient) ReportCreate(ctx context.Context, in *ReportCre
 // for forward compatibility
 type ApiReportServiceServer interface {
 	// 报单登记.
-	ReportCreate(context.Context, *ReportCreateRequest) (*ReportCreateResponse, error)
+	ReportCreate(context.Context, *ReportCreateRequest) (*common.Empty, error)
+	// 报单撤销.
+	ReportRecover(context.Context, *ReportRecoverRequest) (*common.Empty, error)
+	// 报单列表.
+	ReportList(context.Context, *ReportListRequest) (*ReportListResponse, error)
 	mustEmbedUnimplementedApiReportServiceServer()
 }
 
@@ -52,8 +79,14 @@ type ApiReportServiceServer interface {
 type UnimplementedApiReportServiceServer struct {
 }
 
-func (UnimplementedApiReportServiceServer) ReportCreate(context.Context, *ReportCreateRequest) (*ReportCreateResponse, error) {
+func (UnimplementedApiReportServiceServer) ReportCreate(context.Context, *ReportCreateRequest) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportCreate not implemented")
+}
+func (UnimplementedApiReportServiceServer) ReportRecover(context.Context, *ReportRecoverRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportRecover not implemented")
+}
+func (UnimplementedApiReportServiceServer) ReportList(context.Context, *ReportListRequest) (*ReportListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportList not implemented")
 }
 func (UnimplementedApiReportServiceServer) mustEmbedUnimplementedApiReportServiceServer() {}
 
@@ -86,6 +119,42 @@ func _ApiReportService_ReportCreate_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiReportService_ReportRecover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportRecoverRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiReportServiceServer).ReportRecover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiReportService/ReportRecover",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiReportServiceServer).ReportRecover(ctx, req.(*ReportRecoverRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiReportService_ReportList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiReportServiceServer).ReportList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiReportService/ReportList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiReportServiceServer).ReportList(ctx, req.(*ReportListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiReportService_ServiceDesc is the grpc.ServiceDesc for ApiReportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -96,6 +165,14 @@ var ApiReportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportCreate",
 			Handler:    _ApiReportService_ReportCreate_Handler,
+		},
+		{
+			MethodName: "ReportRecover",
+			Handler:    _ApiReportService_ReportRecover_Handler,
+		},
+		{
+			MethodName: "ReportList",
+			Handler:    _ApiReportService_ReportList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
