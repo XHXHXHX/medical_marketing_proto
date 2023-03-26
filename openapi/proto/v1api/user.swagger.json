@@ -1,0 +1,235 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/v1api/user.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "apiUserService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/login": {
+      "post": {
+        "summary": "登录.",
+        "operationId": "apiUserService_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reportLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
+    "/api/logout": {
+      "post": {
+        "summary": "注销.",
+        "operationId": "apiUserService_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
+    "/api/user/change_passwd": {
+      "post": {
+        "summary": "修改密码.",
+        "operationId": "apiUserService_UserChangePasswd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportUserChangePasswdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
+    "/api/user/info": {
+      "post": {
+        "summary": "用户信息.",
+        "operationId": "apiUserService_UserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reportUserInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonEmpty": {
+      "type": "object"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "reportLoginRequest": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "reportLoginResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "reportUserChangePasswdRequest": {
+      "type": "object",
+      "properties": {
+        "old_passwd": {
+          "type": "string"
+        },
+        "new_passwd": {
+          "type": "string"
+        }
+      }
+    },
+    "reportUserInfoResponse": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "user_name": {
+          "type": "string"
+        },
+        "user_mobile": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

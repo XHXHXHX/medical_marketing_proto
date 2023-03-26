@@ -1,0 +1,58 @@
+syntax = "proto3";
+option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1api";
+package v1api.report;
+
+import "google/api/annotations.proto";
+import "proto/common/common.proto";
+
+service apiUserService {
+  // 登录.
+  rpc Login (LoginRequest)returns(LoginResponse) {
+    option (google.api.http) = {
+      post: "/api/login"
+      body: "*"
+    };
+  }
+  // 注销.
+  rpc Logout (common.Empty)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/logout"
+      body: "*"
+    };
+  }
+  // 用户信息.
+  rpc UserInfo (common.Empty)returns(UserInfoResponse) {
+    option (google.api.http) = {
+      post: "/api/user/info"
+      body: "*"
+    };
+  }
+  // 修改密码.
+  rpc UserChangePasswd (UserChangePasswdRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/user/change_passwd"
+      body: "*"
+    };
+  }
+}
+
+message UserChangePasswdRequest {
+  string old_passwd = 1;
+  string new_passwd = 2;
+}
+
+message UserInfoResponse {
+  string user_id = 1;
+  string user_name = 2;
+  string user_mobile = 3;
+  int64 status = 4;
+}
+
+message LoginRequest {
+  string mobile = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
