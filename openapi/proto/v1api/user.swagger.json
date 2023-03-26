@@ -82,6 +82,72 @@
         ]
       }
     },
+    "/api/user/change/role": {
+      "post": {
+        "summary": "修改权限.",
+        "operationId": "apiUserService_UserChangeRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportUserChangeRoleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
+    "/api/user/change/status": {
+      "post": {
+        "summary": "离职用户.",
+        "operationId": "apiUserService_UserChangeStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
     "/api/user/change_passwd": {
       "post": {
         "summary": "修改密码.",
@@ -107,6 +173,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/reportUserChangePasswdRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
+    },
+    "/api/user/create": {
+      "post": {
+        "summary": "创建用户.",
+        "operationId": "apiUserService_UserCreate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reportUserCreateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportUserCreateRequest"
             }
           }
         ],
@@ -147,11 +246,109 @@
           "apiUserService"
         ]
       }
+    },
+    "/api/user/list": {
+      "post": {
+        "summary": "用户列表.",
+        "operationId": "apiUserService_UserList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/reportUserListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportUserListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiUserService"
+        ]
+      }
     }
   },
   "definitions": {
+    "UserListResponseUser": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "commonEmpty": {
       "type": "object"
+    },
+    "commonPage": {
+      "type": "object",
+      "properties": {
+        "current_page": {
+          "type": "string",
+          "format": "int64",
+          "description": "当前页号."
+        },
+        "page_size": {
+          "type": "string",
+          "format": "int64",
+          "description": "每页显示的产品数."
+        }
+      },
+      "description": "请求中使用的 Page."
+    },
+    "commonPagination": {
+      "type": "object",
+      "properties": {
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页显示的产品数."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总数."
+        },
+        "current_page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页号."
+        }
+      },
+      "description": "Response 中使用的 Pagination."
     },
     "protobufAny": {
       "type": "object",
@@ -195,11 +392,48 @@
         }
       }
     },
+    "reportUserChangeRoleRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "role": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "reportUserCreateRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "reportUserCreateResponse": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "reportUserInfoResponse": {
       "type": "object",
       "properties": {
         "user_id": {
-          "type": "string"
+          "type": "string",
+          "format": "int64"
         },
         "user_name": {
           "type": "string"
@@ -210,6 +444,38 @@
         "status": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "reportUserListRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "format": "int64"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "page": {
+          "$ref": "#/definitions/commonPage"
+        }
+      }
+    },
+    "reportUserListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserListResponseUser"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/commonPagination"
         }
       }
     },

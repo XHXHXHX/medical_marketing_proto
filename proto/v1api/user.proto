@@ -34,6 +34,68 @@ service apiUserService {
       body: "*"
     };
   }
+  // 创建用户.
+  rpc UserCreate (UserCreateRequest)returns(UserCreateResponse) {
+    option (google.api.http) = {
+      post: "/api/user/create"
+      body: "*"
+    };
+  }
+  //  修改权限.
+  rpc UserChangeRole (UserChangeRoleRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/user/change/role"
+      body: "*"
+    };
+  }
+  //  离职用户.
+  rpc UserChangeStatus (common.Empty)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/user/change/status"
+      body: "*"
+    };
+  }
+  //  用户列表.
+  rpc UserList (UserListRequest)returns(UserListResponse) {
+    option (google.api.http) = {
+      post: "/api/user/list"
+      body: "*"
+    };
+  }
+}
+
+message UserListRequest {
+  string name = 1;
+  int64 role = 2;
+  string mobile = 3;
+  common.Page page = 6;
+}
+
+message UserListResponse {
+  message User {
+    int64 user_id = 1;
+    string name = 2;
+    string mobile = 3;
+    int64 role = 4;
+    int64 status = 5;
+  }
+  repeated User list = 1;
+  common.Pagination page = 2;
+}
+
+message UserChangeRoleRequest {
+  int64 user_id = 1;
+  int64 role = 2;
+}
+
+message UserCreateRequest {
+  string name = 1;
+  string mobile = 2;
+  int64 role = 3;
+}
+
+message UserCreateResponse {
+  string password = 1;
 }
 
 message UserChangePasswdRequest {
@@ -42,7 +104,7 @@ message UserChangePasswdRequest {
 }
 
 message UserInfoResponse {
-  string user_id = 1;
+  int64 user_id = 1;
   string user_name = 2;
   string user_mobile = 3;
   int64 status = 4;

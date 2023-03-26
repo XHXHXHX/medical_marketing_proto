@@ -27,6 +27,14 @@ type ApiUserServiceClient interface {
 	UserInfo(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*UserInfoResponse, error)
 	// 修改密码.
 	UserChangePasswd(ctx context.Context, in *UserChangePasswdRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// 创建用户.
+	UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
+	// 修改权限.
+	UserChangeRole(ctx context.Context, in *UserChangeRoleRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// 离职用户.
+	UserChangeStatus(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*common.Empty, error)
+	// 用户列表.
+	UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error)
 }
 
 type apiUserServiceClient struct {
@@ -73,6 +81,42 @@ func (c *apiUserServiceClient) UserChangePasswd(ctx context.Context, in *UserCha
 	return out, nil
 }
 
+func (c *apiUserServiceClient) UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error) {
+	out := new(UserCreateResponse)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiUserService/UserCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiUserServiceClient) UserChangeRole(ctx context.Context, in *UserChangeRoleRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiUserService/UserChangeRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiUserServiceClient) UserChangeStatus(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiUserService/UserChangeStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiUserServiceClient) UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error) {
+	out := new(UserListResponse)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiUserService/UserList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiUserServiceServer is the server API for ApiUserService service.
 // All implementations must embed UnimplementedApiUserServiceServer
 // for forward compatibility
@@ -85,6 +129,14 @@ type ApiUserServiceServer interface {
 	UserInfo(context.Context, *common.Empty) (*UserInfoResponse, error)
 	// 修改密码.
 	UserChangePasswd(context.Context, *UserChangePasswdRequest) (*common.Empty, error)
+	// 创建用户.
+	UserCreate(context.Context, *UserCreateRequest) (*UserCreateResponse, error)
+	// 修改权限.
+	UserChangeRole(context.Context, *UserChangeRoleRequest) (*common.Empty, error)
+	// 离职用户.
+	UserChangeStatus(context.Context, *common.Empty) (*common.Empty, error)
+	// 用户列表.
+	UserList(context.Context, *UserListRequest) (*UserListResponse, error)
 	mustEmbedUnimplementedApiUserServiceServer()
 }
 
@@ -103,6 +155,18 @@ func (UnimplementedApiUserServiceServer) UserInfo(context.Context, *common.Empty
 }
 func (UnimplementedApiUserServiceServer) UserChangePasswd(context.Context, *UserChangePasswdRequest) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserChangePasswd not implemented")
+}
+func (UnimplementedApiUserServiceServer) UserCreate(context.Context, *UserCreateRequest) (*UserCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserCreate not implemented")
+}
+func (UnimplementedApiUserServiceServer) UserChangeRole(context.Context, *UserChangeRoleRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserChangeRole not implemented")
+}
+func (UnimplementedApiUserServiceServer) UserChangeStatus(context.Context, *common.Empty) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserChangeStatus not implemented")
+}
+func (UnimplementedApiUserServiceServer) UserList(context.Context, *UserListRequest) (*UserListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserList not implemented")
 }
 func (UnimplementedApiUserServiceServer) mustEmbedUnimplementedApiUserServiceServer() {}
 
@@ -189,6 +253,78 @@ func _ApiUserService_UserChangePasswd_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiUserService_UserCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiUserServiceServer).UserCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiUserService/UserCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiUserServiceServer).UserCreate(ctx, req.(*UserCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiUserService_UserChangeRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserChangeRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiUserServiceServer).UserChangeRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiUserService/UserChangeRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiUserServiceServer).UserChangeRole(ctx, req.(*UserChangeRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiUserService_UserChangeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiUserServiceServer).UserChangeStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiUserService/UserChangeStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiUserServiceServer).UserChangeStatus(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ApiUserService_UserList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiUserServiceServer).UserList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiUserService/UserList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiUserServiceServer).UserList(ctx, req.(*UserListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiUserService_ServiceDesc is the grpc.ServiceDesc for ApiUserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +347,22 @@ var ApiUserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserChangePasswd",
 			Handler:    _ApiUserService_UserChangePasswd_Handler,
+		},
+		{
+			MethodName: "UserCreate",
+			Handler:    _ApiUserService_UserCreate_Handler,
+		},
+		{
+			MethodName: "UserChangeRole",
+			Handler:    _ApiUserService_UserChangeRole_Handler,
+		},
+		{
+			MethodName: "UserChangeStatus",
+			Handler:    _ApiUserService_UserChangeStatus_Handler,
+		},
+		{
+			MethodName: "UserList",
+			Handler:    _ApiUserService_UserList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
