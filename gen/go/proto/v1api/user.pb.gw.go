@@ -237,7 +237,7 @@ func local_request_ApiUserService_UserChangeRole_0(ctx context.Context, marshale
 }
 
 func request_ApiUserService_UserChangeStatus_0(ctx context.Context, marshaler runtime.Marshaler, client ApiUserServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq common.Empty
+	var protoReq UserChangeStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -254,7 +254,7 @@ func request_ApiUserService_UserChangeStatus_0(ctx context.Context, marshaler ru
 }
 
 func local_request_ApiUserService_UserChangeStatus_0(ctx context.Context, marshaler runtime.Marshaler, server ApiUserServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq common.Empty
+	var protoReq UserChangeStatusRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

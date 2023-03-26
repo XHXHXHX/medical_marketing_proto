@@ -32,7 +32,7 @@ type ApiUserServiceClient interface {
 	// 修改权限.
 	UserChangeRole(ctx context.Context, in *UserChangeRoleRequest, opts ...grpc.CallOption) (*common.Empty, error)
 	// 离职用户.
-	UserChangeStatus(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*common.Empty, error)
+	UserChangeStatus(ctx context.Context, in *UserChangeStatusRequest, opts ...grpc.CallOption) (*common.Empty, error)
 	// 用户列表.
 	UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error)
 }
@@ -99,7 +99,7 @@ func (c *apiUserServiceClient) UserChangeRole(ctx context.Context, in *UserChang
 	return out, nil
 }
 
-func (c *apiUserServiceClient) UserChangeStatus(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*common.Empty, error) {
+func (c *apiUserServiceClient) UserChangeStatus(ctx context.Context, in *UserChangeStatusRequest, opts ...grpc.CallOption) (*common.Empty, error) {
 	out := new(common.Empty)
 	err := c.cc.Invoke(ctx, "/v1api.report.apiUserService/UserChangeStatus", in, out, opts...)
 	if err != nil {
@@ -134,7 +134,7 @@ type ApiUserServiceServer interface {
 	// 修改权限.
 	UserChangeRole(context.Context, *UserChangeRoleRequest) (*common.Empty, error)
 	// 离职用户.
-	UserChangeStatus(context.Context, *common.Empty) (*common.Empty, error)
+	UserChangeStatus(context.Context, *UserChangeStatusRequest) (*common.Empty, error)
 	// 用户列表.
 	UserList(context.Context, *UserListRequest) (*UserListResponse, error)
 	mustEmbedUnimplementedApiUserServiceServer()
@@ -162,7 +162,7 @@ func (UnimplementedApiUserServiceServer) UserCreate(context.Context, *UserCreate
 func (UnimplementedApiUserServiceServer) UserChangeRole(context.Context, *UserChangeRoleRequest) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserChangeRole not implemented")
 }
-func (UnimplementedApiUserServiceServer) UserChangeStatus(context.Context, *common.Empty) (*common.Empty, error) {
+func (UnimplementedApiUserServiceServer) UserChangeStatus(context.Context, *UserChangeStatusRequest) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserChangeStatus not implemented")
 }
 func (UnimplementedApiUserServiceServer) UserList(context.Context, *UserListRequest) (*UserListResponse, error) {
@@ -290,7 +290,7 @@ func _ApiUserService_UserChangeRole_Handler(srv interface{}, ctx context.Context
 }
 
 func _ApiUserService_UserChangeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+	in := new(UserChangeStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -302,7 +302,7 @@ func _ApiUserService_UserChangeStatus_Handler(srv interface{}, ctx context.Conte
 		FullMethod: "/v1api.report.apiUserService/UserChangeStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiUserServiceServer).UserChangeStatus(ctx, req.(*common.Empty))
+		return srv.(ApiUserServiceServer).UserChangeStatus(ctx, req.(*UserChangeStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

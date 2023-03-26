@@ -139,7 +139,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/commonEmpty"
+              "$ref": "#/definitions/reportUserChangeStatusRequest"
             }
           }
         ],
@@ -400,6 +400,15 @@
           "format": "int64"
         },
         "role": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "reportUserChangeStatusRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
           "type": "string",
           "format": "int64"
         }
