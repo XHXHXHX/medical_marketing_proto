@@ -1,0 +1,338 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/v1api/customer.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "apiCustomerServerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/customer/distribute": {
+      "post": {
+        "summary": "给客服分配报单.",
+        "operationId": "apiCustomerServerService_CustomerServerDistribute",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customerCustomerDistributeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiCustomerServerService"
+        ]
+      }
+    },
+    "/api/customer/report/list": {
+      "post": {
+        "summary": "查看客服分配列表.",
+        "operationId": "apiCustomerServerService_CustomerServerList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/customerCustomerReportListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customerCustomerReportListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiCustomerServerService"
+        ]
+      }
+    },
+    "/api/customer/report/result": {
+      "post": {
+        "summary": "客服回访结果.",
+        "operationId": "apiCustomerServerService_CustomerServerResult",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customerCustomerServerResultRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiCustomerServerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonEmpty": {
+      "type": "object"
+    },
+    "commonPage": {
+      "type": "object",
+      "properties": {
+        "current_page": {
+          "type": "string",
+          "format": "int64",
+          "description": "当前页号."
+        },
+        "page_size": {
+          "type": "string",
+          "format": "int64",
+          "description": "每页显示的产品数."
+        }
+      },
+      "description": "请求中使用的 Page."
+    },
+    "commonPagination": {
+      "type": "object",
+      "properties": {
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页显示的产品数."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总数."
+        },
+        "current_page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页号."
+        }
+      },
+      "description": "Response 中使用的 Pagination."
+    },
+    "customerCustomerDistributeRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "format": "int64",
+          "description": "用户ID."
+        },
+        "report_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "报单id"
+        }
+      }
+    },
+    "customerCustomerReportListRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "员工姓名（客服姓名）"
+        },
+        "mobile": {
+          "type": "string",
+          "title": "员工手机号.（客服手机号）"
+        },
+        "customer_mobile": {
+          "type": "string",
+          "description": "客户手机号."
+        },
+        "is_finished": {
+          "type": "string",
+          "format": "int64",
+          "title": "是否完成 0无 1 完成  2 未完成"
+        },
+        "distribute_start_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "分配开始时间."
+        },
+        "distribute_end_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "分配结束时间."
+        },
+        "finish_start_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "完成开始时间."
+        },
+        "finish_end_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "完成结束时间."
+        },
+        "page": {
+          "$ref": "#/definitions/commonPage"
+        }
+      }
+    },
+    "customerCustomerReportListResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/customerCustomerServerInfo"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/commonPagination"
+        }
+      }
+    },
+    "customerCustomerServerInfo": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "report_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "报单id"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64",
+          "description": "对应客服id."
+        },
+        "name": {
+          "type": "string",
+          "description": "客服名称."
+        },
+        "distribute_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "分配任务时间."
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "顾客姓名."
+        },
+        "customer_amount": {
+          "type": "string",
+          "format": "int64",
+          "description": "消费金额."
+        },
+        "is_finished": {
+          "type": "string",
+          "format": "int64",
+          "title": "是否完成. 1是 2否"
+        },
+        "desc": {
+          "type": "string",
+          "description": "备注."
+        }
+      }
+    },
+    "customerCustomerServerResultRequest": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "客服分配任务id"
+        },
+        "is_finished": {
+          "type": "string",
+          "format": "int64",
+          "title": "结果. 1是 2否"
+        },
+        "desc": {
+          "type": "string",
+          "description": "备注."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

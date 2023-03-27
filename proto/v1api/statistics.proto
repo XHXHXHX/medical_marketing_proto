@@ -13,7 +13,35 @@ service apiStatisticsService {
       body: "*"
     };
   }
+  // 客服部统计.
+  rpc StatisticsCustomer (StatisticsCustomerRequest)returns(StatisticsCustomerResponse) {
+    option (google.api.http) = {
+      post: "/api/statistics/customer"
+      body: "*"
+    };
+  }
 }
+
+message StatisticsCustomerResponse {
+  message Info {
+    // 员工姓名.
+    string user_name = 1;
+    // 员工手机号.
+    string user_mobile = 2;
+    // 总任务数.
+    int64 total_num = 3;
+    // 完成任务数.
+    int64 finish_num = 4;
+  }
+  repeated Info list = 1;
+
+  common.Pagination page = 2;
+}
+
+message StatisticsCustomerRequest {
+  common.Page page = 1;
+}
+
 
 message StatisticsMarketRequest {
   common.Page page = 1;
@@ -25,10 +53,10 @@ message StatisticsMarketResponse {
     string user_name = 1;
     // 员工手机号.
     string user_mobile = 2;
-    // 总报单数.
-    int64 report_num = 3;
-    // 到访客户数.
-    int64 arrived_num = 4;
+    // 总任务数.
+    int64 total_num = 3;
+    // 完成任务数.
+    int64 finish_num = 4;
   }
   repeated Info list = 1;
 

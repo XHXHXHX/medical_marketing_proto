@@ -16,6 +16,39 @@
     "application/json"
   ],
   "paths": {
+    "/api/statistics/customer": {
+      "post": {
+        "summary": "客服部统计.",
+        "operationId": "apiStatisticsService_StatisticsCustomer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statisticsStatisticsCustomerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/statisticsStatisticsCustomerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiStatisticsService"
+        ]
+      }
+    },
     "/api/statistics/market": {
       "post": {
         "summary": "市场部统计.",
@@ -51,29 +84,6 @@
     }
   },
   "definitions": {
-    "StatisticsMarketResponseInfo": {
-      "type": "object",
-      "properties": {
-        "user_name": {
-          "type": "string",
-          "description": "员工姓名."
-        },
-        "user_mobile": {
-          "type": "string",
-          "description": "员工手机号."
-        },
-        "report_num": {
-          "type": "string",
-          "format": "int64",
-          "description": "总报单数."
-        },
-        "arrived_num": {
-          "type": "string",
-          "format": "int64",
-          "description": "到访客户数."
-        }
-      }
-    },
     "commonPage": {
       "type": "object",
       "properties": {
@@ -146,6 +156,51 @@
         }
       }
     },
+    "statisticsStatisticsCustomerRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/commonPage"
+        }
+      }
+    },
+    "statisticsStatisticsCustomerResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statisticsStatisticsCustomerResponseInfo"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/commonPagination"
+        }
+      }
+    },
+    "statisticsStatisticsCustomerResponseInfo": {
+      "type": "object",
+      "properties": {
+        "user_name": {
+          "type": "string",
+          "description": "员工姓名."
+        },
+        "user_mobile": {
+          "type": "string",
+          "description": "员工手机号."
+        },
+        "total_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "总任务数."
+        },
+        "finish_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "完成任务数."
+        }
+      }
+    },
     "statisticsStatisticsMarketRequest": {
       "type": "object",
       "properties": {
@@ -160,11 +215,34 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StatisticsMarketResponseInfo"
+            "$ref": "#/definitions/statisticsStatisticsMarketResponseInfo"
           }
         },
         "page": {
           "$ref": "#/definitions/commonPagination"
+        }
+      }
+    },
+    "statisticsStatisticsMarketResponseInfo": {
+      "type": "object",
+      "properties": {
+        "user_name": {
+          "type": "string",
+          "description": "员工姓名."
+        },
+        "user_mobile": {
+          "type": "string",
+          "description": "员工手机号."
+        },
+        "total_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "总任务数."
+        },
+        "finish_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "完成任务数."
         }
       }
     }

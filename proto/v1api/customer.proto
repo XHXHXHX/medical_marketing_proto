@@ -1,0 +1,93 @@
+syntax = "proto3";
+option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1api";
+package v1api.customer;
+
+import "google/api/annotations.proto";
+import "proto/common/common.proto";
+
+service apiCustomerServerService {
+  // 给客服分配报单.
+  rpc CustomerServerDistribute (CustomerDistributeRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/customer/distribute"
+      body: "*"
+    };
+  }
+  // 查看客服分配列表.
+  rpc CustomerServerList (CustomerReportListRequest)returns(CustomerReportListResponse) {
+    option (google.api.http) = {
+      post: "/api/customer/report/list"
+      body: "*"
+    };
+  }
+  // 客服回访结果.
+  rpc CustomerServerResult (CustomerServerResultRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/customer/report/result"
+      body: "*"
+    };
+  }
+}
+
+message CustomerServerResultRequest {
+  // 客服分配任务id
+  int64 task_id = 1;
+  // 结果. 1是 2否
+  int64 is_finished = 2;
+  // 备注.
+  string desc = 3;
+}
+
+message CustomerServerInfo {
+  //
+  int64 task_id = 1;
+  // 报单id
+  int64 report_id = 2;
+  // 对应客服id.
+  int64 user_id = 3;
+  // 客服名称.
+  string name = 4;
+  // 分配任务时间.
+  int64 distribute_time = 5;
+  // 顾客姓名.
+  string customer_name = 6;
+  // 消费金额.
+  int64 customer_amount = 7;
+  // 是否完成. 1是 2否
+  int64 is_finished = 8;
+  // 备注.
+  string desc = 9;
+}
+
+message CustomerReportListResponse {
+  repeated CustomerServerInfo list = 1;
+  common.Pagination page = 2;
+}
+
+message CustomerReportListRequest {
+  // 员工姓名（客服姓名）
+  string name = 1;
+  // 员工手机号.（客服手机号）
+  string mobile = 2;
+  // 客户手机号.
+  string customer_mobile = 3;
+  // 是否完成 0无 1 完成  2 未完成
+  int64 is_finished = 4;
+  // 分配开始时间.
+  int64 distribute_start_time = 5;
+  // 分配结束时间.
+  int64 distribute_end_time = 6;
+  // 完成开始时间.
+  int64 finish_start_time = 7;
+  // 完成结束时间.
+  int64 finish_end_time = 8;
+
+  common.Page page = 9;
+}
+
+message CustomerDistributeRequest {
+  // 用户ID.
+  int64 user_id = 1;
+  // 报单id
+  repeated int64 report_ids = 2;
+}

@@ -20,6 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiStatisticsServiceClient interface {
 	// 市场部统计.
 	StatisticsMarket(ctx context.Context, in *StatisticsMarketRequest, opts ...grpc.CallOption) (*StatisticsMarketResponse, error)
+	// 客服部统计.
+	StatisticsCustomer(ctx context.Context, in *StatisticsCustomerRequest, opts ...grpc.CallOption) (*StatisticsCustomerResponse, error)
 }
 
 type apiStatisticsServiceClient struct {
@@ -39,12 +41,23 @@ func (c *apiStatisticsServiceClient) StatisticsMarket(ctx context.Context, in *S
 	return out, nil
 }
 
+func (c *apiStatisticsServiceClient) StatisticsCustomer(ctx context.Context, in *StatisticsCustomerRequest, opts ...grpc.CallOption) (*StatisticsCustomerResponse, error) {
+	out := new(StatisticsCustomerResponse)
+	err := c.cc.Invoke(ctx, "/v1api.statistics.apiStatisticsService/StatisticsCustomer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiStatisticsServiceServer is the server API for ApiStatisticsService service.
 // All implementations must embed UnimplementedApiStatisticsServiceServer
 // for forward compatibility
 type ApiStatisticsServiceServer interface {
 	// 市场部统计.
 	StatisticsMarket(context.Context, *StatisticsMarketRequest) (*StatisticsMarketResponse, error)
+	// 客服部统计.
+	StatisticsCustomer(context.Context, *StatisticsCustomerRequest) (*StatisticsCustomerResponse, error)
 	mustEmbedUnimplementedApiStatisticsServiceServer()
 }
 
@@ -54,6 +67,9 @@ type UnimplementedApiStatisticsServiceServer struct {
 
 func (UnimplementedApiStatisticsServiceServer) StatisticsMarket(context.Context, *StatisticsMarketRequest) (*StatisticsMarketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StatisticsMarket not implemented")
+}
+func (UnimplementedApiStatisticsServiceServer) StatisticsCustomer(context.Context, *StatisticsCustomerRequest) (*StatisticsCustomerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StatisticsCustomer not implemented")
 }
 func (UnimplementedApiStatisticsServiceServer) mustEmbedUnimplementedApiStatisticsServiceServer() {}
 
@@ -86,6 +102,24 @@ func _ApiStatisticsService_StatisticsMarket_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiStatisticsService_StatisticsCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatisticsCustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiStatisticsServiceServer).StatisticsCustomer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.statistics.apiStatisticsService/StatisticsCustomer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiStatisticsServiceServer).StatisticsCustomer(ctx, req.(*StatisticsCustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiStatisticsService_ServiceDesc is the grpc.ServiceDesc for ApiStatisticsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -96,6 +130,10 @@ var ApiStatisticsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StatisticsMarket",
 			Handler:    _ApiStatisticsService_StatisticsMarket_Handler,
+		},
+		{
+			MethodName: "StatisticsCustomer",
+			Handler:    _ApiStatisticsService_StatisticsCustomer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
