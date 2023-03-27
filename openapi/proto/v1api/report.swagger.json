@@ -186,10 +186,14 @@
         "consumer_name": {
           "type": "string"
         },
-        "is_arrived": {
+        "is_match": {
           "type": "boolean"
         },
-        "arrive_time": {
+        "actual_arrive_time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "consumer_amount": {
           "type": "string",
           "format": "int64"
         }
@@ -211,14 +215,17 @@
       "type": "object",
       "properties": {
         "consumer_mobile": {
-          "type": "string"
+          "type": "string",
+          "title": "客户电话"
         },
         "consumer_name": {
-          "type": "string"
+          "type": "string",
+          "title": "客户姓名"
         },
         "expire_arrive_time": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "预期到访时间"
         }
       }
     },
@@ -240,7 +247,7 @@
           "type": "string",
           "format": "int64"
         },
-        "is_arrived": {
+        "is_match": {
           "type": "boolean"
         },
         "page": {

@@ -84,7 +84,7 @@
     },
     "/api/user/change/role": {
       "post": {
-        "summary": "修改权限.",
+        "summary": "修改权限 暂不实现.",
         "operationId": "apiUserService_UserChangeRole",
         "responses": {
           "200": {
@@ -117,7 +117,7 @@
     },
     "/api/user/change/status": {
       "post": {
-        "summary": "离职用户.",
+        "summary": "更改用户状态为离职.",
         "operationId": "apiUserService_UserChangeStatus",
         "responses": {
           "200": {
@@ -287,21 +287,26 @@
       "properties": {
         "user_id": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "用户id."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "用户姓名."
         },
         "mobile": {
-          "type": "string"
+          "type": "string",
+          "description": "用户手机号."
         },
         "role": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "角色权限"
         },
         "status": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "离职状态 1正常 2离职"
         }
       }
     },
@@ -366,10 +371,12 @@
       "type": "object",
       "properties": {
         "mobile": {
-          "type": "string"
+          "type": "string",
+          "title": "手机号"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "title": "密码"
         }
       }
     },
@@ -377,7 +384,8 @@
       "type": "object",
       "properties": {
         "token": {
-          "type": "string"
+          "type": "string",
+          "title": "令牌"
         }
       }
     },
@@ -385,10 +393,12 @@
       "type": "object",
       "properties": {
         "old_passwd": {
-          "type": "string"
+          "type": "string",
+          "title": "旧密码"
         },
         "new_passwd": {
-          "type": "string"
+          "type": "string",
+          "title": "新密码"
         }
       }
     },
@@ -397,20 +407,23 @@
       "properties": {
         "user_id": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "用户id."
         },
         "role": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "角色权限"
         }
       }
     },
     "reportUserChangeStatusRequest": {
       "type": "object",
       "properties": {
-        "id": {
+        "user_id": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "用户id."
         }
       }
     },
@@ -418,14 +431,17 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "用户姓名."
         },
         "mobile": {
-          "type": "string"
+          "type": "string",
+          "description": "用户手机号."
         },
         "role": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "角色权限"
         }
       }
     },
@@ -433,7 +449,8 @@
       "type": "object",
       "properties": {
         "password": {
-          "type": "string"
+          "type": "string",
+          "description": "初始密码."
         }
       }
     },
@@ -442,17 +459,26 @@
       "properties": {
         "user_id": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "用户id."
         },
-        "user_name": {
-          "type": "string"
+        "name": {
+          "type": "string",
+          "description": "用户姓名."
         },
-        "user_mobile": {
-          "type": "string"
+        "mobile": {
+          "type": "string",
+          "description": "用户手机号."
+        },
+        "role": {
+          "type": "string",
+          "format": "int64",
+          "title": "角色权限"
         },
         "status": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "离职状态 1正常 2离职"
         }
       }
     },
@@ -460,17 +486,21 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "用户姓名."
         },
         "role": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "description": "角色权限."
         },
         "mobile": {
-          "type": "string"
+          "type": "string",
+          "description": "手机号."
         },
         "page": {
-          "$ref": "#/definitions/commonPage"
+          "$ref": "#/definitions/commonPage",
+          "description": "分页."
         }
       }
     },

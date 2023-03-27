@@ -1,0 +1,172 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/v1api/statistics.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "apiStatisticsService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/statistics/market": {
+      "post": {
+        "summary": "市场部统计.",
+        "operationId": "apiStatisticsService_StatisticsMarket",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/statisticsStatisticsMarketResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/statisticsStatisticsMarketRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiStatisticsService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "StatisticsMarketResponseInfo": {
+      "type": "object",
+      "properties": {
+        "user_name": {
+          "type": "string",
+          "description": "员工姓名."
+        },
+        "user_mobile": {
+          "type": "string",
+          "description": "员工手机号."
+        },
+        "report_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "总报单数."
+        },
+        "arrived_num": {
+          "type": "string",
+          "format": "int64",
+          "description": "到访客户数."
+        }
+      }
+    },
+    "commonPage": {
+      "type": "object",
+      "properties": {
+        "current_page": {
+          "type": "string",
+          "format": "int64",
+          "description": "当前页号."
+        },
+        "page_size": {
+          "type": "string",
+          "format": "int64",
+          "description": "每页显示的产品数."
+        }
+      },
+      "description": "请求中使用的 Page."
+    },
+    "commonPagination": {
+      "type": "object",
+      "properties": {
+        "page_count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总页数."
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "每页显示的产品数."
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "总数."
+        },
+        "current_page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当前页号."
+        }
+      },
+      "description": "Response 中使用的 Pagination."
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "statisticsStatisticsMarketRequest": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/commonPage"
+        }
+      }
+    },
+    "statisticsStatisticsMarketResponse": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatisticsMarketResponseInfo"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/commonPagination"
+        }
+      }
+    }
+  }
+}

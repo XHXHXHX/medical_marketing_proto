@@ -1,0 +1,36 @@
+syntax = "proto3";
+option go_package = "github.com/XHXHXHX/medical_marketing_proto/gen/go/proto/v1api";
+package v1api.statistics;
+
+import "google/api/annotations.proto";
+import "proto/common/common.proto";
+
+service apiStatisticsService {
+  // 市场部统计.
+  rpc StatisticsMarket (StatisticsMarketRequest)returns(StatisticsMarketResponse) {
+    option (google.api.http) = {
+      post: "/api/statistics/market"
+      body: "*"
+    };
+  }
+}
+
+message StatisticsMarketRequest {
+  common.Page page = 1;
+}
+
+message StatisticsMarketResponse {
+  message Info {
+    // 员工姓名.
+    string user_name = 1;
+    // 员工手机号.
+    string user_mobile = 2;
+    // 总报单数.
+    int64 report_num = 3;
+    // 到访客户数.
+    int64 arrived_num = 4;
+  }
+  repeated Info list = 1;
+
+  common.Pagination page = 2;
+}

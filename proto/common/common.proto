@@ -32,8 +32,9 @@ message Report {
   int64 except_arrive_time = 4; // 预期到达时间
   string consumer_mobile = 5; // 客户电话
   string consumer_name = 6; // 客户名称
-  bool is_arrived = 7; // 是否来过
-  int64 arrive_time = 8; // 客户到达时间
+  bool is_match = 7; // 是否匹配
+  int64 actual_arrive_time = 8; // 客户到达时间
+  int64 consumer_amount = 9;
 }
 
 message Error {

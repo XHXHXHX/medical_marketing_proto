@@ -29,9 +29,9 @@ type ApiUserServiceClient interface {
 	UserChangePasswd(ctx context.Context, in *UserChangePasswdRequest, opts ...grpc.CallOption) (*common.Empty, error)
 	// 创建用户.
 	UserCreate(ctx context.Context, in *UserCreateRequest, opts ...grpc.CallOption) (*UserCreateResponse, error)
-	// 修改权限.
+	// 修改权限 暂不实现.
 	UserChangeRole(ctx context.Context, in *UserChangeRoleRequest, opts ...grpc.CallOption) (*common.Empty, error)
-	// 离职用户.
+	// 更改用户状态为离职.
 	UserChangeStatus(ctx context.Context, in *UserChangeStatusRequest, opts ...grpc.CallOption) (*common.Empty, error)
 	// 用户列表.
 	UserList(ctx context.Context, in *UserListRequest, opts ...grpc.CallOption) (*UserListResponse, error)
@@ -131,9 +131,9 @@ type ApiUserServiceServer interface {
 	UserChangePasswd(context.Context, *UserChangePasswdRequest) (*common.Empty, error)
 	// 创建用户.
 	UserCreate(context.Context, *UserCreateRequest) (*UserCreateResponse, error)
-	// 修改权限.
+	// 修改权限 暂不实现.
 	UserChangeRole(context.Context, *UserChangeRoleRequest) (*common.Empty, error)
-	// 离职用户.
+	// 更改用户状态为离职.
 	UserChangeStatus(context.Context, *UserChangeStatusRequest) (*common.Empty, error)
 	// 用户列表.
 	UserList(context.Context, *UserListRequest) (*UserListResponse, error)

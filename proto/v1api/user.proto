@@ -41,14 +41,14 @@ service apiUserService {
       body: "*"
     };
   }
-  //  修改权限.
+  //  修改权限 暂不实现.
   rpc UserChangeRole (UserChangeRoleRequest)returns(common.Empty) {
     option (google.api.http) = {
       post: "/api/user/change/role"
       body: "*"
     };
   }
-  //  离职用户.
+  //  更改用户状态为离职.
   rpc UserChangeStatus (UserChangeStatusRequest)returns(common.Empty) {
     option (google.api.http) = {
       post: "/api/user/change/status"
@@ -65,22 +65,32 @@ service apiUserService {
 }
 
 message UserChangeStatusRequest {
-  int64 id = 1;
+  // 用户id.
+  int64 user_id = 1;
 }
 
 message UserListRequest {
+  // 用户姓名.
   string name = 1;
+  // 角色权限.
   int64 role = 2;
+  // 手机号.
   string mobile = 3;
+  // 分页.
   common.Page page = 6;
 }
 
 message UserListResponse {
   message User {
+    // 用户id.
     int64 user_id = 1;
+    // 用户姓名.
     string name = 2;
+    // 用户手机号.
     string mobile = 3;
+    // 角色权限
     int64 role = 4;
+    // 离职状态 1正常 2离职
     int64 status = 5;
   }
   repeated User list = 1;
@@ -88,37 +98,54 @@ message UserListResponse {
 }
 
 message UserChangeRoleRequest {
+  // 用户id.
   int64 user_id = 1;
+  // 角色权限
   int64 role = 2;
 }
 
 message UserCreateRequest {
+  // 用户姓名.
   string name = 1;
+  // 用户手机号.
   string mobile = 2;
+  // 角色权限
   int64 role = 3;
 }
 
 message UserCreateResponse {
+  // 初始密码.
   string password = 1;
 }
 
 message UserChangePasswdRequest {
+  // 旧密码
   string old_passwd = 1;
+  // 新密码
   string new_passwd = 2;
 }
 
 message UserInfoResponse {
+  // 用户id.
   int64 user_id = 1;
-  string user_name = 2;
-  string user_mobile = 3;
-  int64 status = 4;
+  // 用户姓名.
+  string name = 2;
+  // 用户手机号.
+  string mobile = 3;
+  // 角色权限
+  int64 role = 4;
+  // 离职状态 1正常 2离职
+  int64 status = 5;
 }
 
 message LoginRequest {
+  // 手机号
   string mobile = 1;
+  // 密码
   string password = 2;
 }
 
 message LoginResponse {
+  // 令牌
   string token = 1;
 }

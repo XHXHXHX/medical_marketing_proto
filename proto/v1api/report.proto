@@ -39,13 +39,16 @@ message ReportListRequest {
   int64 create_start_time = 2; // 报单开始时间
   int64 creat_end_time = 3; // 报单结束时间
   int64 user_id = 4; // 员工id
-  bool is_arrived = 5; // 是否来过
+  bool is_match = 5; // 是否匹配
   common.Page page = 6;
 }
 
 message ReportCreateRequest {
+  // 客户电话
   string consumer_mobile = 1;
+  // 客户姓名
   string consumer_name = 2;
+  // 预期到访时间
   int64 expire_arrive_time = 3;
 }
 
