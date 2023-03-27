@@ -117,6 +117,78 @@
     }
   },
   "definitions": {
+    "commonCustomerServerHistory": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "任务id"
+        },
+        "time": {
+          "type": "string",
+          "format": "int64",
+          "description": "时间."
+        },
+        "desc": {
+          "type": "string",
+          "description": "备注."
+        }
+      }
+    },
+    "commonCustomerServerInfo": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "report_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "报单id"
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64",
+          "description": "对应客服id."
+        },
+        "name": {
+          "type": "string",
+          "description": "客服名称."
+        },
+        "distribute_time": {
+          "type": "string",
+          "format": "int64",
+          "description": "分配任务时间."
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "顾客姓名."
+        },
+        "customer_amount": {
+          "type": "string",
+          "format": "int64",
+          "description": "消费金额."
+        },
+        "is_finished": {
+          "type": "string",
+          "format": "int64",
+          "title": "是否完成. 1是 2否"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonCustomerServerHistory"
+          },
+          "description": "任务历史."
+        },
+        "last_desc": {
+          "type": "string",
+          "description": "最新备注."
+        }
+      }
+    },
     "commonEmpty": {
       "type": "object"
     },
@@ -231,57 +303,11 @@
         "list": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/customerCustomerServerInfo"
+            "$ref": "#/definitions/commonCustomerServerInfo"
           }
         },
         "page": {
           "$ref": "#/definitions/commonPagination"
-        }
-      }
-    },
-    "customerCustomerServerInfo": {
-      "type": "object",
-      "properties": {
-        "task_id": {
-          "type": "string",
-          "format": "int64"
-        },
-        "report_id": {
-          "type": "string",
-          "format": "int64",
-          "title": "报单id"
-        },
-        "user_id": {
-          "type": "string",
-          "format": "int64",
-          "description": "对应客服id."
-        },
-        "name": {
-          "type": "string",
-          "description": "客服名称."
-        },
-        "distribute_time": {
-          "type": "string",
-          "format": "int64",
-          "description": "分配任务时间."
-        },
-        "customer_name": {
-          "type": "string",
-          "description": "顾客姓名."
-        },
-        "customer_amount": {
-          "type": "string",
-          "format": "int64",
-          "description": "消费金额."
-        },
-        "is_finished": {
-          "type": "string",
-          "format": "int64",
-          "title": "是否完成. 1是 2否"
-        },
-        "desc": {
-          "type": "string",
-          "description": "备注."
         }
       }
     },

@@ -38,29 +38,8 @@ message CustomerServerResultRequest {
   string desc = 3;
 }
 
-message CustomerServerInfo {
-  //
-  int64 task_id = 1;
-  // 报单id
-  int64 report_id = 2;
-  // 对应客服id.
-  int64 user_id = 3;
-  // 客服名称.
-  string name = 4;
-  // 分配任务时间.
-  int64 distribute_time = 5;
-  // 顾客姓名.
-  string customer_name = 6;
-  // 消费金额.
-  int64 customer_amount = 7;
-  // 是否完成. 1是 2否
-  int64 is_finished = 8;
-  // 备注.
-  string desc = 9;
-}
-
 message CustomerReportListResponse {
-  repeated CustomerServerInfo list = 1;
+  repeated common.CustomerServerInfo list = 1;
   common.Pagination page = 2;
 }
 
