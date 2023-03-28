@@ -191,6 +191,10 @@
           "type": "string",
           "format": "int64",
           "title": "完成时间"
+        },
+        "customer_mobile": {
+          "type": "string",
+          "title": "顾客电话"
         }
       }
     },

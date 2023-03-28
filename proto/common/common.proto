@@ -75,4 +75,6 @@ message CustomerServerInfo {
   string last_desc = 10;
   // 完成时间
   int64 finish_time = 11;
+  // 顾客电话
+  string customer_mobile = 12;
 }
