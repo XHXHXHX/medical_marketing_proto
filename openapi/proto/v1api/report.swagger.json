@@ -196,6 +196,10 @@
         "consumer_amount": {
           "type": "string",
           "format": "int64"
+        },
+        "create_time": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

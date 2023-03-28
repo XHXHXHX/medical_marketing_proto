@@ -34,7 +34,8 @@ message Report {
   string consumer_name = 6; // 客户名称
   bool is_match = 7; // 是否匹配
   int64 actual_arrive_time = 8; // 客户到达时间
-  int64 consumer_amount = 9;
+  int64 consumer_amount = 9; // 消费金额
+  int64 create_time = 10; // 创建时间
 }
 
 message Error {
