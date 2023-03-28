@@ -73,4 +73,6 @@ message CustomerServerInfo {
   repeated CustomerServerHistory history = 9;
   // 最新备注.
   string last_desc = 10;
+  // 完成时间
+  int64 finish_time = 11;
 }

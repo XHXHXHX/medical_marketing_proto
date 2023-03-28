@@ -186,6 +186,11 @@
         "last_desc": {
           "type": "string",
           "description": "最新备注."
+        },
+        "finish_time": {
+          "type": "string",
+          "format": "int64",
+          "title": "完成时间"
         }
       }
     },
