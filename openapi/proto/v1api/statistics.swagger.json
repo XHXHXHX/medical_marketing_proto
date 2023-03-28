@@ -159,6 +159,14 @@
     "statisticsStatisticsCustomerRequest": {
       "type": "object",
       "properties": {
+        "mobile": {
+          "type": "string",
+          "description": "员工手机号."
+        },
+        "name": {
+          "type": "string",
+          "description": "员工姓名."
+        },
         "page": {
           "$ref": "#/definitions/commonPage"
         }
@@ -204,6 +212,14 @@
     "statisticsStatisticsMarketRequest": {
       "type": "object",
       "properties": {
+        "mobile": {
+          "type": "string",
+          "description": "员工手机号."
+        },
+        "name": {
+          "type": "string",
+          "description": "员工姓名."
+        },
         "page": {
           "$ref": "#/definitions/commonPage"
         }
