@@ -222,7 +222,7 @@
           "type": "string",
           "title": "客户姓名"
         },
-        "expire_arrive_time": {
+        "expect_arrive_time": {
           "type": "string",
           "format": "int64",
           "title": "预期到访时间"

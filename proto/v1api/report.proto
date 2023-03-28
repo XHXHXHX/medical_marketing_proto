@@ -50,7 +50,7 @@ message ReportCreateRequest {
   // 客户姓名
   string consumer_name = 2;
   // 预期到访时间
-  int64 expire_arrive_time = 3;
+  int64 expect_arrive_time = 3;
 }
 
 message ReportRecoverRequest {
