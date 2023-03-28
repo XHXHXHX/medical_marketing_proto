@@ -248,7 +248,8 @@
           "format": "int64"
         },
         "is_match": {
-          "type": "boolean"
+          "type": "string",
+          "format": "int64"
         },
         "user_name": {
           "type": "string"
