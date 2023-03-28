@@ -250,6 +250,9 @@
         "is_match": {
           "type": "boolean"
         },
+        "user_name": {
+          "type": "string"
+        },
         "page": {
           "$ref": "#/definitions/commonPage"
         }

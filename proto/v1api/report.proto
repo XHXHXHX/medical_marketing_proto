@@ -40,7 +40,8 @@ message ReportListRequest {
   int64 creat_end_time = 3; // 报单结束时间
   int64 user_id = 4; // 员工id
   bool is_match = 5; // 是否匹配
-  common.Page page = 6;
+  string user_name = 6;
+  common.Page page = 7;
 }
 
 message ReportCreateRequest {
