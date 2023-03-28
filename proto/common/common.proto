@@ -51,6 +51,10 @@ message CustomerServerHistory {
   int64 time = 2;
   // 备注.
   string desc = 3;
+  // 客服id
+  int64 user_id = 4;
+  // 客服名称
+  string name = 5;
 }
 
 message CustomerServerInfo {

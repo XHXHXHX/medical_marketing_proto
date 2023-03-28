@@ -133,6 +133,15 @@
         "desc": {
           "type": "string",
           "description": "备注."
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64",
+          "title": "客服id"
+        },
+        "name": {
+          "type": "string",
+          "title": "客服名称"
         }
       }
     },
