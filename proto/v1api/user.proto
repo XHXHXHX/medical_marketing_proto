@@ -136,6 +136,8 @@ message UserInfoResponse {
   int64 role = 4;
   // 离职状态 1正常 2离职
   int64 status = 5;
+  // 是不是超管
+  bool is_admin = 6;
 }
 
 message LoginRequest {
