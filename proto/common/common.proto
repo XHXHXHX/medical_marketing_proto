@@ -38,9 +38,13 @@ message Report {
   int64 create_time = 10; // 创建时间
 }
 
+// 通过的 error 信息
 message Error {
+  // 错误 code.
   string code = 1;
+  // 错误提示信息, 可用于提示文案.
   string message = 2;
+  // 错误的详细信息, 可用于定位错误详情.
   string details = 3;
 }
 

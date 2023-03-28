@@ -316,13 +316,17 @@ func (x *Report) GetCreateTime() int64 {
 	return 0
 }
 
+// 通过的 error 信息
 type Error struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code    string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	// 错误 code.
+	Code string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	// 错误提示信息, 可用于提示文案.
 	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	// 错误的详细信息, 可用于定位错误详情.
 	Details string `protobuf:"bytes,3,opt,name=details,proto3" json:"details,omitempty"`
 }
 
