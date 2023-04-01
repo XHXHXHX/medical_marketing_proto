@@ -38,7 +38,7 @@ message Report {
   int64 create_time = 10; // 创建时间
   bool relation_task = 11; // 是否关联任务
   int64 relation_task_user_id   = 12; // 关联用户id
-  int64 relation_task_username   = 13; // 关联用户名称
+  string relation_task_username   = 13; // 关联用户名称
 }
 
 // 通过的 error 信息

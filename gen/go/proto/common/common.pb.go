@@ -202,19 +202,19 @@ type Report struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id                   int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                                    //
-	UserId               int64  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                              // 员工id
-	UserName             string `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`                                         // 员工名称
-	ExceptArriveTime     int64  `protobuf:"varint,4,opt,name=except_arrive_time,json=exceptArriveTime,proto3" json:"except_arrive_time,omitempty"`              // 预期到达时间
-	ConsumerMobile       string `protobuf:"bytes,5,opt,name=consumer_mobile,json=consumerMobile,proto3" json:"consumer_mobile,omitempty"`                       // 客户电话
-	ConsumerName         string `protobuf:"bytes,6,opt,name=consumer_name,json=consumerName,proto3" json:"consumer_name,omitempty"`                             // 客户名称
-	IsMatch              int64  `protobuf:"varint,7,opt,name=is_match,json=isMatch,proto3" json:"is_match,omitempty"`                                           // 是否匹配 1是 2否 0啥也不是
-	ActualArriveTime     int64  `protobuf:"varint,8,opt,name=actual_arrive_time,json=actualArriveTime,proto3" json:"actual_arrive_time,omitempty"`              // 客户到达时间
-	ConsumerAmount       int64  `protobuf:"varint,9,opt,name=consumer_amount,json=consumerAmount,proto3" json:"consumer_amount,omitempty"`                      // 消费金额
-	CreateTime           int64  `protobuf:"varint,10,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`                                 // 创建时间
-	RelationTask         bool   `protobuf:"varint,11,opt,name=relation_task,json=relationTask,proto3" json:"relation_task,omitempty"`                           // 是否关联任务
-	RelationTaskUserId   int64  `protobuf:"varint,12,opt,name=relation_task_user_id,json=relationTaskUserId,proto3" json:"relation_task_user_id,omitempty"`     // 关联用户id
-	RelationTaskUsername int64  `protobuf:"varint,13,opt,name=relation_task_username,json=relationTaskUsername,proto3" json:"relation_task_username,omitempty"` // 关联用户名称
+	Id                   int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                                                                   //
+	UserId               int64  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`                                             // 员工id
+	UserName             string `protobuf:"bytes,3,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`                                        // 员工名称
+	ExceptArriveTime     int64  `protobuf:"varint,4,opt,name=except_arrive_time,json=exceptArriveTime,proto3" json:"except_arrive_time,omitempty"`             // 预期到达时间
+	ConsumerMobile       string `protobuf:"bytes,5,opt,name=consumer_mobile,json=consumerMobile,proto3" json:"consumer_mobile,omitempty"`                      // 客户电话
+	ConsumerName         string `protobuf:"bytes,6,opt,name=consumer_name,json=consumerName,proto3" json:"consumer_name,omitempty"`                            // 客户名称
+	IsMatch              int64  `protobuf:"varint,7,opt,name=is_match,json=isMatch,proto3" json:"is_match,omitempty"`                                          // 是否匹配 1是 2否 0啥也不是
+	ActualArriveTime     int64  `protobuf:"varint,8,opt,name=actual_arrive_time,json=actualArriveTime,proto3" json:"actual_arrive_time,omitempty"`             // 客户到达时间
+	ConsumerAmount       int64  `protobuf:"varint,9,opt,name=consumer_amount,json=consumerAmount,proto3" json:"consumer_amount,omitempty"`                     // 消费金额
+	CreateTime           int64  `protobuf:"varint,10,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`                                // 创建时间
+	RelationTask         bool   `protobuf:"varint,11,opt,name=relation_task,json=relationTask,proto3" json:"relation_task,omitempty"`                          // 是否关联任务
+	RelationTaskUserId   int64  `protobuf:"varint,12,opt,name=relation_task_user_id,json=relationTaskUserId,proto3" json:"relation_task_user_id,omitempty"`    // 关联用户id
+	RelationTaskUsername string `protobuf:"bytes,13,opt,name=relation_task_username,json=relationTaskUsername,proto3" json:"relation_task_username,omitempty"` // 关联用户名称
 }
 
 func (x *Report) Reset() {
@@ -333,11 +333,11 @@ func (x *Report) GetRelationTaskUserId() int64 {
 	return 0
 }
 
-func (x *Report) GetRelationTaskUsername() int64 {
+func (x *Report) GetRelationTaskUsername() string {
 	if x != nil {
 		return x.RelationTaskUsername
 	}
-	return 0
+	return ""
 }
 
 // 通过的 error 信息
@@ -684,7 +684,7 @@ var file_proto_common_common_proto_rawDesc = []byte{
 	0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x12, 0x72, 0x65,
 	0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x61, 0x73, 0x6b, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64,
 	0x12, 0x34, 0x0a, 0x16, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x61, 0x73,
-	0x6b, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03,
+	0x6b, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x14, 0x72, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x61, 0x73, 0x6b, 0x55, 0x73,
 	0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x4f, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12,
 	0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x63,
