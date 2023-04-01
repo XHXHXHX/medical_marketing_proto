@@ -187,7 +187,8 @@
           "type": "string"
         },
         "is_match": {
-          "type": "boolean"
+          "type": "string",
+          "format": "int64"
         },
         "actual_arrive_time": {
           "type": "string",

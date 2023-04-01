@@ -32,7 +32,7 @@ message Report {
   int64 except_arrive_time = 4; // 预期到达时间
   string consumer_mobile = 5; // 客户电话
   string consumer_name = 6; // 客户名称
-  bool is_match = 7; // 是否匹配 1是 2否 0啥也不是
+  int64 is_match = 7; // 是否匹配 1是 2否 0啥也不是
   int64 actual_arrive_time = 8; // 客户到达时间
   int64 consumer_amount = 9; // 消费金额
   int64 create_time = 10; // 创建时间
