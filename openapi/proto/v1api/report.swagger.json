@@ -200,6 +200,17 @@
         "create_time": {
           "type": "string",
           "format": "int64"
+        },
+        "relation_task": {
+          "type": "boolean"
+        },
+        "relation_task_user_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "relation_task_username": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -257,6 +268,9 @@
         },
         "user_name": {
           "type": "string"
+        },
+        "relation_task": {
+          "type": "boolean"
         },
         "page": {
           "$ref": "#/definitions/commonPage"
