@@ -208,7 +208,7 @@ type Report struct {
 	ExceptArriveTime     int64  `protobuf:"varint,4,opt,name=except_arrive_time,json=exceptArriveTime,proto3" json:"except_arrive_time,omitempty"`              // 预期到达时间
 	ConsumerMobile       string `protobuf:"bytes,5,opt,name=consumer_mobile,json=consumerMobile,proto3" json:"consumer_mobile,omitempty"`                       // 客户电话
 	ConsumerName         string `protobuf:"bytes,6,opt,name=consumer_name,json=consumerName,proto3" json:"consumer_name,omitempty"`                             // 客户名称
-	IsMatch              bool   `protobuf:"varint,7,opt,name=is_match,json=isMatch,proto3" json:"is_match,omitempty"`                                           // 是否匹配
+	IsMatch              bool   `protobuf:"varint,7,opt,name=is_match,json=isMatch,proto3" json:"is_match,omitempty"`                                           // 是否匹配 1是 2否 0啥也不是
 	ActualArriveTime     int64  `protobuf:"varint,8,opt,name=actual_arrive_time,json=actualArriveTime,proto3" json:"actual_arrive_time,omitempty"`              // 客户到达时间
 	ConsumerAmount       int64  `protobuf:"varint,9,opt,name=consumer_amount,json=consumerAmount,proto3" json:"consumer_amount,omitempty"`                      // 消费金额
 	CreateTime           int64  `protobuf:"varint,10,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`                                 // 创建时间
