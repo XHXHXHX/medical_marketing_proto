@@ -332,6 +332,9 @@
           "type": "string",
           "format": "int64"
         },
+        "tag": {
+          "type": "string"
+        },
         "page": {
           "$ref": "#/definitions/commonPage"
         }

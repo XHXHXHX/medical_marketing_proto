@@ -56,7 +56,8 @@ message ReportListRequest {
   bool relation_task = 7; // 是否额外返回关联任务字段
   int64 arrive_start_time = 8; // 到访开始时间
   int64 arrive_end_time = 9; // 到访结束时间
-  common.Page page = 10;
+  string tag = 10;
+  common.Page page = 11;
 }
 
 message ReportCreateRequest {
