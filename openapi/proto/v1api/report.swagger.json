@@ -147,6 +147,39 @@
           "apiReportService"
         ]
       }
+    },
+    "/api/report/match": {
+      "post": {
+        "summary": "报单列表.",
+        "operationId": "apiReportService_ReportChangeMatch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportReportChangeMatchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiReportService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -273,6 +306,19 @@
           "format": "int64"
         },
         "time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "reportReportChangeMatchRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_match": {
           "type": "string",
           "format": "int64"
         }

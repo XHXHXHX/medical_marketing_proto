@@ -27,6 +27,8 @@ type ApiReportServiceClient interface {
 	ReportList(ctx context.Context, in *ReportListRequest, opts ...grpc.CallOption) (*ReportListResponse, error)
 	// 报单列表.
 	ReportChangeActualArrivedTime(ctx context.Context, in *ReportChangeActualArrivedTimeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// 报单列表.
+	ReportChangeMatch(ctx context.Context, in *ReportChangeMatchRequest, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
 type apiReportServiceClient struct {
@@ -73,6 +75,15 @@ func (c *apiReportServiceClient) ReportChangeActualArrivedTime(ctx context.Conte
 	return out, nil
 }
 
+func (c *apiReportServiceClient) ReportChangeMatch(ctx context.Context, in *ReportChangeMatchRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/v1api.report.apiReportService/ReportChangeMatch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiReportServiceServer is the server API for ApiReportService service.
 // All implementations must embed UnimplementedApiReportServiceServer
 // for forward compatibility
@@ -85,6 +96,8 @@ type ApiReportServiceServer interface {
 	ReportList(context.Context, *ReportListRequest) (*ReportListResponse, error)
 	// 报单列表.
 	ReportChangeActualArrivedTime(context.Context, *ReportChangeActualArrivedTimeRequest) (*common.Empty, error)
+	// 报单列表.
+	ReportChangeMatch(context.Context, *ReportChangeMatchRequest) (*common.Empty, error)
 	mustEmbedUnimplementedApiReportServiceServer()
 }
 
@@ -103,6 +116,9 @@ func (UnimplementedApiReportServiceServer) ReportList(context.Context, *ReportLi
 }
 func (UnimplementedApiReportServiceServer) ReportChangeActualArrivedTime(context.Context, *ReportChangeActualArrivedTimeRequest) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportChangeActualArrivedTime not implemented")
+}
+func (UnimplementedApiReportServiceServer) ReportChangeMatch(context.Context, *ReportChangeMatchRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportChangeMatch not implemented")
 }
 func (UnimplementedApiReportServiceServer) mustEmbedUnimplementedApiReportServiceServer() {}
 
@@ -189,6 +205,24 @@ func _ApiReportService_ReportChangeActualArrivedTime_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiReportService_ReportChangeMatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportChangeMatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiReportServiceServer).ReportChangeMatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1api.report.apiReportService/ReportChangeMatch",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiReportServiceServer).ReportChangeMatch(ctx, req.(*ReportChangeMatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ApiReportService_ServiceDesc is the grpc.ServiceDesc for ApiReportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -211,6 +245,10 @@ var ApiReportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportChangeActualArrivedTime",
 			Handler:    _ApiReportService_ReportChangeActualArrivedTime_Handler,
+		},
+		{
+			MethodName: "ReportChangeMatch",
+			Handler:    _ApiReportService_ReportChangeMatch_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

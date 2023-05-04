@@ -34,6 +34,18 @@ service apiReportService {
       body: "*"
     };
   }
+  // 报单列表.
+  rpc ReportChangeMatch (ReportChangeMatchRequest)returns(common.Empty) {
+    option (google.api.http) = {
+      post: "/api/report/match"
+      body: "*"
+    };
+  }
+}
+
+message ReportChangeMatchRequest {
+  int64 id = 1;
+  int64 is_match = 5; // 是否匹配 1是 2否
 }
 
 message ReportChangeActualArrivedTimeRequest {
