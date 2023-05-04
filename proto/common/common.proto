@@ -39,6 +39,8 @@ message Report {
   bool relation_task = 11; // 是否关联任务
   int64 relation_task_user_id   = 12; // 关联用户id
   string relation_task_username   = 13; // 关联用户名称
+  string tag = 14; // 标签
+  string memo = 15; // 备注
 }
 
 // 通过的 error 信息

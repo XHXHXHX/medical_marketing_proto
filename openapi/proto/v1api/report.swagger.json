@@ -16,6 +16,39 @@
     "application/json"
   ],
   "paths": {
+    "/api/report/actual_arrived_time": {
+      "post": {
+        "summary": "报单列表.",
+        "operationId": "apiReportService_ReportChangeActualArrivedTime",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/commonEmpty"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/reportReportChangeActualArrivedTimeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "apiReportService"
+        ]
+      }
+    },
     "/api/report/create": {
       "post": {
         "summary": "报单登记.",
@@ -211,6 +244,12 @@
         },
         "relation_task_username": {
           "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "memo": {
+          "type": "string"
         }
       }
     },
@@ -223,6 +262,19 @@
         "value": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "reportReportChangeActualArrivedTimeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "time": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -271,6 +323,14 @@
         },
         "relation_task": {
           "type": "boolean"
+        },
+        "arrive_start_time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "arrive_end_time": {
+          "type": "string",
+          "format": "int64"
         },
         "page": {
           "$ref": "#/definitions/commonPage"
