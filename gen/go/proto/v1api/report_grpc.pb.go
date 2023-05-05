@@ -25,9 +25,9 @@ type ApiReportServiceClient interface {
 	ReportRecover(ctx context.Context, in *ReportRecoverRequest, opts ...grpc.CallOption) (*common.Empty, error)
 	// 报单列表.
 	ReportList(ctx context.Context, in *ReportListRequest, opts ...grpc.CallOption) (*ReportListResponse, error)
-	// 报单列表.
+	// 报单到访时间修改.
 	ReportChangeActualArrivedTime(ctx context.Context, in *ReportChangeActualArrivedTimeRequest, opts ...grpc.CallOption) (*common.Empty, error)
-	// 报单列表.
+	// 报单匹配修改.
 	ReportChangeMatch(ctx context.Context, in *ReportChangeMatchRequest, opts ...grpc.CallOption) (*common.Empty, error)
 }
 
@@ -94,9 +94,9 @@ type ApiReportServiceServer interface {
 	ReportRecover(context.Context, *ReportRecoverRequest) (*common.Empty, error)
 	// 报单列表.
 	ReportList(context.Context, *ReportListRequest) (*ReportListResponse, error)
-	// 报单列表.
+	// 报单到访时间修改.
 	ReportChangeActualArrivedTime(context.Context, *ReportChangeActualArrivedTimeRequest) (*common.Empty, error)
-	// 报单列表.
+	// 报单匹配修改.
 	ReportChangeMatch(context.Context, *ReportChangeMatchRequest) (*common.Empty, error)
 	mustEmbedUnimplementedApiReportServiceServer()
 }

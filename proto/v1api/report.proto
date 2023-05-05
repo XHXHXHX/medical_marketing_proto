@@ -27,14 +27,14 @@ service apiReportService {
       body: "*"
     };
   }
-  // 报单列表.
+  // 报单到访时间修改.
   rpc ReportChangeActualArrivedTime (ReportChangeActualArrivedTimeRequest)returns(common.Empty) {
     option (google.api.http) = {
       post: "/api/report/actual_arrived_time"
       body: "*"
     };
   }
-  // 报单列表.
+  // 报单匹配修改.
   rpc ReportChangeMatch (ReportChangeMatchRequest)returns(common.Empty) {
     option (google.api.http) = {
       post: "/api/report/match"

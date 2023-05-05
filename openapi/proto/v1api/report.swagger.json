@@ -18,7 +18,7 @@
   "paths": {
     "/api/report/actual_arrived_time": {
       "post": {
-        "summary": "报单列表.",
+        "summary": "报单到访时间修改.",
         "operationId": "apiReportService_ReportChangeActualArrivedTime",
         "responses": {
           "200": {
@@ -150,7 +150,7 @@
     },
     "/api/report/match": {
       "post": {
-        "summary": "报单列表.",
+        "summary": "报单匹配修改.",
         "operationId": "apiReportService_ReportChangeMatch",
         "responses": {
           "200": {
