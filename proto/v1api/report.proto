@@ -79,6 +79,8 @@ message ReportCreateRequest {
   string consumer_name = 2;
   // 预期到访时间
   int64 expect_arrive_time = 3;
+  // 标签
+  int64 tag = 4;
 }
 
 message ReportRecoverRequest {

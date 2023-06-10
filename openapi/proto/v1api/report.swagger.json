@@ -339,6 +339,11 @@
           "type": "string",
           "format": "int64",
           "title": "预期到访时间"
+        },
+        "tag": {
+          "type": "string",
+          "format": "int64",
+          "title": "标签"
         }
       }
     },
