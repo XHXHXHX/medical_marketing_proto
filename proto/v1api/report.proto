@@ -80,7 +80,7 @@ message ReportCreateRequest {
   // 预期到访时间
   int64 expect_arrive_time = 3;
   // 标签
-  int64 tag = 4;
+  string tag = 4;
 }
 
 message ReportRecoverRequest {
